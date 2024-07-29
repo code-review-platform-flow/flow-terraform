@@ -49,6 +49,3 @@ jobs:
 
       - name: Print Argo CD admin password
         run: cat admin-password.txt
-
-      - name: Apply Argo CD Application
-        run: kubectl apply -f applications/argocd-app.yaml
