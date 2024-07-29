@@ -31,6 +31,20 @@ resource "google_sql_database_instance" "postgres_dev" {
         value = var.authorized_network_value
       }
     }
+
+    insights_config {
+      query_insights_enabled  = false
+      query_plans_per_minute  = 0
+      query_string_length     = 0
+      record_application_tags = false
+      record_client_address   = false
+    }
+  }
+
+  lifecycle {
+    ignore_changes = [
+      settings[0].insights_config,
+    ]
   }
 
   deletion_protection = false
@@ -69,7 +83,22 @@ resource "google_sql_database_instance" "postgres_prd" {
         value = var.authorized_network_value
       }
     }
+
+    insights_config {
+      query_insights_enabled  = false
+      query_plans_per_minute  = 0
+      query_string_length     = 0
+      record_application_tags = false
+      record_client_address   = false
+    }
   }
+
+  lifecycle {
+    ignore_changes = [
+      settings[0].insights_config,
+    ]
+  }
+
 
   deletion_protection = false
 }
