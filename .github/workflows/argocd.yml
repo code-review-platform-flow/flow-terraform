@@ -22,7 +22,7 @@ jobs:
       - name: Set up Google Cloud SDK
         uses: google-github-actions/setup-gcloud@v2.1.0
         with:
-          project_id: YOUR_GCP_PROJECT_ID
+          project_id: code-review-platform-flow
           install_components: kubectl
 
       - name: Configure kubectl
