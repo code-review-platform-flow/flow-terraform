@@ -44,7 +44,7 @@ jobs:
 
       # tfvars 파일 복사
       - name: Copy tfvars file
-        run: cp tfvars-repo/path/to/your.tfvars ./terraform.tfvars
+        run: cp tfvars-repo/terraform.tfvars ./terraform.tfvars
 
       # Terraform Init
       - name: Terraform Init
