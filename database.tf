@@ -39,6 +39,11 @@ resource "google_sql_database_instance" "postgres_dev" {
       record_application_tags = false
       record_client_address   = false
     }
+
+    database_flags {
+      name  = "max_connections"
+      value = "100" # 원하는 최대 연결 수로 변경
+    }
   }
 
   lifecycle {
@@ -90,6 +95,11 @@ resource "google_sql_database_instance" "postgres_prd" {
       query_string_length     = 1024
       record_application_tags = false
       record_client_address   = false
+    }
+
+    database_flags {
+      name  = "max_connections"
+      value = "100" # 원하는 최대 연결 수로 변경
     }
   }
 
