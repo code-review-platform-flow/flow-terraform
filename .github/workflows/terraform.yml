@@ -30,9 +30,8 @@ jobs:
           terraform_version: 1.9.2
 
       - name: Configure GCP Credentials
-        env:
-          GOOGLE_APPLICATION_CREDENTIALS: ${{ secrets.GCP_CREDENTIALS }}
-        run: echo "${{ secrets.GCP_CREDENTIALS }}" > $HOME/gcp-key.json
+        run: |
+          echo "${{ secrets.GCP_CREDENTIALS }}" > $HOME/gcp-key.json
 
       - name: Terraform Init
         env:
