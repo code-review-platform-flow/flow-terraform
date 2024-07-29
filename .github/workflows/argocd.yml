@@ -6,7 +6,7 @@ on:
 
 jobs:
   deploy:
-    if: contains(github.event.pull_request.labels.*.name, 'argocd')
+    if: contains(github.event.pull_request.labels.*.name, 'deploy')
     name: Deploy Argo CD and Application using Helm and Argo CD
     runs-on: ubuntu-latest
 
@@ -22,15 +22,12 @@ jobs:
       - name: Set up Google Cloud SDK
         uses: google-github-actions/setup-gcloud@v2.1.0
         with:
-          project_id: code-review-platform-flow
+          project_id: YOUR_GCP_PROJECT_ID
           install_components: kubectl
 
-      - name: Create kube directory
+      - name: Configure kubectl
         run: |
-          mkdir -p $HOME/.kube
-
-      - name: Set up Kubeconfig
-        run: echo "${{ secrets.KUBECONFIG }}" > $HOME/.kube/config
+          gcloud container clusters get-credentials primary --zone asia-northeast3-a --project code-review-platform-flow
 
       - name: Install Helm
         run: |
