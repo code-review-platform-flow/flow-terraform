@@ -35,7 +35,7 @@ resource "google_sql_database_instance" "postgres_dev" {
     insights_config {
       query_insights_enabled  = false
       query_plans_per_minute  = 0
-      query_string_length     = 0
+      query_string_length     = 1024
       record_application_tags = false
       record_client_address   = false
     }
@@ -87,7 +87,7 @@ resource "google_sql_database_instance" "postgres_prd" {
     insights_config {
       query_insights_enabled  = false
       query_plans_per_minute  = 0
-      query_string_length     = 0
+      query_string_length     = 1024
       record_application_tags = false
       record_client_address   = false
     }
