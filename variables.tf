@@ -1,3 +1,8 @@
+variable "gcp_credentials_file" {
+  description = "Path to the GCP credentials JSON file"
+  type        = string
+}
+
 variable "vpc_network_name" {
   description = "VPC 네트워크 이름"
   type        = string
