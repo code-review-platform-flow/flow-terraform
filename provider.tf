@@ -5,8 +5,6 @@ provider "google" {
 
   # 리소스가 위치할 기본 지역을 지정합니다. (한국 지역: asia-northeast3)
   region = var.gcp_region
-
-  credentials = file(var.gcp_credentials_file)
 }
 
 # Terraform 설정
