@@ -13,10 +13,10 @@ resource "google_container_cluster" "primary" {
   initial_node_count = 1
 
   # 클러스터가 속할 VPC 네트워크를 지정합니다.
-  network = var.vpc_network
+  network = google_compute_network.main.self_link
 
   # 클러스터가 속할 서브네트워크를 지정합니다.
-  subnetwork = var.subnetwork
+  subnetwork = google_compute_subnetwork.private.self_link
 
   # 네트워킹 모드를 VPC 네이티브 모드로 설정합니다.
   networking_mode = "VPC_NATIVE"

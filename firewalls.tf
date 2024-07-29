@@ -1,7 +1,7 @@
 # Google Compute Firewall 설정
 resource "google_compute_firewall" "allow-ssh" {
   name = var.firewall_name
-  network = var.firewall_network
+  network = google_compute_network.main.name
 
   allow {
     protocol = "tcp"
