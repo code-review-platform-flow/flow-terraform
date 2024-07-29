@@ -11,37 +11,56 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
+      # 현재 repository를 체크아웃
       - name: Checkout repository
         uses: actions/checkout@v4.1.7
 
+      # tfvars 파일이 있는 다른 repository를 체크아웃
+      - name: Checkout tfvars repository
+        uses: actions/checkout@v4.1.7
+        with:
+          repository: code-review-platform-flow/flow-terraform-tfvars
+          path: tfvars-repo
+          token: ${{ secrets.TOKEN }}
+
+      # Terraform 설정
       - name: Set up Terraform
         uses: hashicorp/setup-terraform@v3.1.1
         with:
           terraform_version: 1.9.2
 
+      # GCP 인증
       - name: Authenticate to Google Cloud
         uses: google-github-actions/auth@v2.1.3
         with:
           credentials_json: "${{ secrets.GCP_CREDENTIALS }}"
 
+      # Google Cloud SDK 설정
       - name: Set up Google Cloud SDK
         uses: google-github-actions/setup-gcloud@v2.1.0
         with:
           version: "latest"
           project_id: "code-review-platform-flow"
 
+      # tfvars 파일 복사
+      - name: Copy tfvars file
+        run: cp tfvars-repo/path/to/your.tfvars ./terraform.tfvars
+
+      # Terraform Init
       - name: Terraform Init
         run: terraform init
         env:
           GOOGLE_CREDENTIALS: ${{ secrets.GCP_CREDENTIALS }}
 
+      # Terraform Plan
       - name: Terraform Plan
-        run: terraform plan
+        run: terraform plan -var-file=terraform.tfvars
         env:
           GOOGLE_CREDENTIALS: ${{ secrets.GCP_CREDENTIALS }}
 
+      # Terraform Apply
       - name: Terraform Apply
         if: github.ref == 'refs/heads/main'
-        run: terraform apply -auto-approve
+        run: terraform apply -auto-approve -var-file=terraform.tfvars
         env:
           GOOGLE_CREDENTIALS: ${{ secrets.GCP_CREDENTIALS }}
