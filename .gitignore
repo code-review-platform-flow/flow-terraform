@@ -1,0 +1,5 @@
+# .gitignore
+.terraform/
+plan.txt
+tfplan
+terraform.tfvars
