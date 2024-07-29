@@ -25,7 +25,7 @@ resource "google_compute_router_nat" "nat" {
   }
 
   # NAT IP 주소를 지정합니다.
-  nat_ips = var.nat_ip
+  nat_ips = ["NAT_IP"]
 }
 
 # 외부 IP 주소 생성
