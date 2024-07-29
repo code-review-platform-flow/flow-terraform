@@ -44,4 +44,9 @@ resource "google_container_node_pool" "general" {
     oauth_scopes = var.oauth_scopes
     disk_size_gb = 50
   }
+
+  autoscaling {
+    min_node_count = 0
+    max_node_count = 5
+  }
 }

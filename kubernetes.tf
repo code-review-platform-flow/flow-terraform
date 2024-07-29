@@ -66,4 +66,5 @@ resource "google_container_cluster" "primary" {
       disabled = false
     }
   }
+
 }
