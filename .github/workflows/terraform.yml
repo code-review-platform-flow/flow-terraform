@@ -17,26 +17,35 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v4.1.7
 
+      - name: Checkout tfvars repository
+        uses: actions/checkout@v4.1.7
+        with:
+          repository: code-review-platform-flow/flow-terraform-tfvars
+          token: ${{ secrets.GH_PAT }}
+          path: tfvars
+
       - name: Setup Terraform
         uses: hashicorp/setup-terraform@v3.1.1
         with:
           terraform_version: 1.9.2
 
       - name: Configure GCP Credentials
+        env:
+          GOOGLE_APPLICATION_CREDENTIALS: ${{ secrets.GCP_CREDENTIALS }}
         run: echo "${{ secrets.GCP_CREDENTIALS }}" > $HOME/gcp-key.json
 
       - name: Terraform Init
-        run: terraform init
         env:
-          GOOGLE_CREDENTIALS: ${{ secrets.GCP_CREDENTIALS }}
+          GOOGLE_APPLICATION_CREDENTIALS: $HOME/gcp-key.json
+        run: terraform init
 
       - name: Terraform Plan
-        run: terraform plan -out=tfplan
         env:
-          GOOGLE_CREDENTIALS: ${{ secrets.GCP_CREDENTIALS }}
+          GOOGLE_APPLICATION_CREDENTIALS: $HOME/gcp-key.json
+        run: terraform plan -var-file=tfvars/terraform.tfvars -out=tfplan
 
       - name: Terraform Apply
         if: github.event_name == 'push'
-        run: terraform apply -auto-approve tfplan
         env:
-          GOOGLE_CREDENTIALS: ${{ secrets.GCP_CREDENTIALS }}
+          GOOGLE_APPLICATION_CREDENTIALS: $HOME/gcp-key.json
+        run: terraform apply -auto-approve tfplan
