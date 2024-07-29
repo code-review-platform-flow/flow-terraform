@@ -42,5 +42,6 @@ resource "google_container_node_pool" "general" {
 
     # OAuth 스코프를 지정합니다.
     oauth_scopes = var.oauth_scopes
+    disk_size_gb = 50
   }
 }
