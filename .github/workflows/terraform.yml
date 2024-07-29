@@ -31,20 +31,20 @@ jobs:
 
       - name: Configure GCP Credentials
         run: |
-          echo "${{ secrets.GCP_CREDENTIALS }}" > $HOME/gcp-key.json
+          echo "${{ secrets.GCP_CREDENTIALS }}" > ./gcp-key.json
 
       - name: Terraform Init
         env:
-          GOOGLE_APPLICATION_CREDENTIALS: $HOME/gcp-key.json
+          GOOGLE_APPLICATION_CREDENTIALS: ./gcp-key.json
         run: terraform init
 
       - name: Terraform Plan
         env:
-          GOOGLE_APPLICATION_CREDENTIALS: $HOME/gcp-key.json
+          GOOGLE_APPLICATION_CREDENTIALS: ./gcp-key.json
         run: terraform plan -var-file=tfvars/terraform.tfvars -out=tfplan
 
       - name: Terraform Apply
         if: github.event_name == 'push'
         env:
-          GOOGLE_APPLICATION_CREDENTIALS: $HOME/gcp-key.json
+          GOOGLE_APPLICATION_CREDENTIALS: ./gcp-key.json
         run: terraform apply -auto-approve tfplan
