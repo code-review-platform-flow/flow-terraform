@@ -13,7 +13,7 @@ resource "google_container_node_pool" "general" {
   cluster = google_container_cluster.primary.id
 
   # 노드 풀의 초기 노드 개수를 지정합니다.
-  node_count = 3
+  node_count = 4
 
   # 노드 관리 설정
   management {
