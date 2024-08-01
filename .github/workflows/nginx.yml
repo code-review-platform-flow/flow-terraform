@@ -30,4 +30,4 @@ jobs:
         run: gcloud container clusters get-credentials primary --zone asia-northeast3-a --project code-review-platform-flow
 
       - name: Deploy to Kubernetes
-        run: kubectl apply -f ./applications/nginx-deployment.yaml
+        run: kubectl apply -f ./applications/nginx/nginx-deployment.yaml
