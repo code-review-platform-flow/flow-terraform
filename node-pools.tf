@@ -13,7 +13,7 @@ resource "google_container_node_pool" "general" {
   cluster = google_container_cluster.primary.id
 
   # 노드 풀의 초기 노드 개수를 지정합니다.
-  node_count = var.node_count
+  node_count = 1
 
   # 노드 관리 설정
   management {
@@ -44,9 +44,39 @@ resource "google_container_node_pool" "general" {
     oauth_scopes = var.oauth_scopes
     disk_size_gb = 50
   }
+}
+
+resource "google_container_node_pool" "spot" {
+  name    = "spot"
+  cluster = google_container_cluster.primary.id
+
+  management {
+    auto_repair  = true
+    auto_upgrade = true
+  }
 
   autoscaling {
-    min_node_count = var.node_count
+    min_node_count = 0
     max_node_count = 10
+  }
+
+  node_config {
+    preemptible  = true
+    machine_type = "e2-small"
+
+    labels = {
+      team = "devops"
+    }
+
+    taint {
+      key    = "instance_type"
+      value  = "spot"
+      effect = "NO_SCHEDULE"
+    }
+
+    service_account = google_service_account.kubernetes.email
+    oauth_scopes = [
+      "https://www.googleapis.com/auth/cloud-platform"
+    ]
   }
 }
