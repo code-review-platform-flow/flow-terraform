@@ -2,13 +2,9 @@ name: Deploy Nginx to Kubernetes
 
 on:
   push:
-    branches:
-      - main
 
 jobs:
   deploy:
-    if: contains(github.event.pull_request.labels.*.name, 'nginx')
-    name: Deploy Argo CD and Application using Helm and Argo CD
     runs-on: ubuntu-latest
 
     steps:
