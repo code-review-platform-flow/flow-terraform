@@ -13,7 +13,7 @@ resource "google_container_node_pool" "general" {
   cluster = google_container_cluster.primary.id
 
   # 노드 풀의 초기 노드 개수를 지정합니다.
-  node_count = 4
+  node_count = 3
 
   # 노드 관리 설정
   management {
@@ -29,8 +29,8 @@ resource "google_container_node_pool" "general" {
     # 노드를 비프리엠티블로 설정합니다.
     preemptible = false
 
-    # 머신 타입을 지정합니다. (e2-small)
-    machine_type = var.machine_type
+    # 머신 타입을 지정합니다.
+    machine_type = "e2-medium"
 
     # 노드에 적용할 레이블을 지정합니다.
     labels = {
