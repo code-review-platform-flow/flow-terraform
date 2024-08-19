@@ -50,6 +50,8 @@ resource "google_container_node_pool" "spot" {
   name    = "spot"
   cluster = google_container_cluster.primary.id
 
+  initial_node_count = 2
+
   management {
     auto_repair  = true
     auto_upgrade = true
