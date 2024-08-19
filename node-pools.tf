@@ -50,7 +50,7 @@ resource "google_container_node_pool" "spot" {
   name    = "spot"
   cluster = google_container_cluster.primary.id
 
-  initial_node_count = 2
+  initial_node_count = 1
 
   management {
     auto_repair  = true
@@ -64,7 +64,7 @@ resource "google_container_node_pool" "spot" {
 
   node_config {
     preemptible  = true
-    machine_type = "e2-small"
+    machine_type = "e2-medium"
 
     labels = {
       team = "devops"
