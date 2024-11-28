@@ -40,7 +40,7 @@ jobs:
         uses: google-github-actions/setup-gcloud@v2.1.0
         with:
           version: "latest"
-          project_id: "code-review-platform-flow"
+          project_id: "gcuflow"
 
       # tfvars 파일 복사
       - name: Copy tfvars file
