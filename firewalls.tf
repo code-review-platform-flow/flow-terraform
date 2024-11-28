@@ -22,3 +22,15 @@ resource "google_compute_firewall" "allow-http-https" {
 
   source_ranges = var.firewall_source_ranges
 }
+
+resource "google_compute_firewall" "allow-db" {
+  name = var.db_firewall_name
+  network = google_compute_network.main.name
+
+  allow {
+    protocol = "tcp"
+    ports = ["5432"]
+  }
+
+  source_ranges = var.firewall_source_ranges
+}
