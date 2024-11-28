@@ -232,6 +232,11 @@ variable "http_https_firewall_name" {
   type        = string
 }
 
+variable "db_firewall_name" {
+  description = "db 방화벽 규칙 이름"
+  type        = string
+}
+
 variable "firewall_network" {
   description = "방화벽 규칙이 속할 네트워크"
   type        = string
