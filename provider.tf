@@ -12,7 +12,7 @@ terraform {
   # Terraform 상태를 저장할 GCS 백엔드 설정
   backend "gcs" {
     # 상태 파일을 저장할 GCS 버킷 이름을 지정합니다.
-    bucket = "flow-tf-state-staging"
+    bucket = "flow-terraform-state-staging"
 
     # 상태 파일 경로의 접두사를 지정합니다.
     prefix = "terraform/state"

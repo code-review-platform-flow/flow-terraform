@@ -1,8 +1,3 @@
-variable "gcp_credentials_file" {
-  description = "Path to the GCP credentials JSON file"
-  type        = string
-}
-
 variable "vpc_network_name" {
   description = "VPC 네트워크 이름"
   type        = string
@@ -132,17 +127,6 @@ variable "gcp_region" {
   type        = string
 }
 
-# Terraform GCS 백엔드 변수
-variable "tf_state_bucket" {
-  description = "Terraform 상태 파일을 저장할 GCS 버킷 이름"
-  type        = string
-}
-
-variable "tf_state_prefix" {
-  description = "Terraform 상태 파일 경로의 접두사"
-  type        = string
-}
-
 # Kubernetes 클러스터 서비스 계정 변수
 variable "kubernetes_service_account_id" {
   description = "Kubernetes 클러스터 서비스 계정 ID"
@@ -238,8 +222,13 @@ variable "master_ipv4_cidr_block" {
 }
 
 # Google Compute Firewall 변수
-variable "firewall_name" {
-  description = "방화벽 규칙 이름"
+variable "ssh_firewall_name" {
+  description = "ssh 방화벽 규칙 이름"
+  type        = string
+}
+
+variable "http_https_firewall_name" {
+  description = "http https 방화벽 규칙 이름"
   type        = string
 }
 
