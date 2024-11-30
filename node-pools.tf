@@ -80,5 +80,6 @@ resource "google_container_node_pool" "spot" {
     oauth_scopes = [
       "https://www.googleapis.com/auth/cloud-platform"
     ]
+    disk_size_gb = 50
   }
 }
