@@ -50,17 +50,17 @@ resource "google_container_node_pool" "spot" {
   name    = "spot"
   cluster = google_container_cluster.primary.id
 
-  initial_node_count = 1
+  initial_node_count = 3
 
   management {
     auto_repair  = true
     auto_upgrade = true
   }
 
-  autoscaling {
-    min_node_count = 1
-    max_node_count = 10
-  }
+  # autoscaling {
+  #  min_node_count = 1
+  #  max_node_count = 10
+  # }
 
   node_config {
     preemptible  = true
@@ -80,5 +80,6 @@ resource "google_container_node_pool" "spot" {
     oauth_scopes = [
       "https://www.googleapis.com/auth/cloud-platform"
     ]
+    disk_size_gb = 50
   }
 }
